@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Electronic Watch</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      
+      #clock {
+        font-size: 3em;
+        margin: 20px;
+      }
+      
+      #date {
+        font-size: 1.5em;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id="clock"></div>
+    <div id="date"></div>
+    
+    <script>
+      // function to update the clock
+      function updateClock() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        
+        let timeString = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById("clock").innerHTML = timeString;
+      }
+      
+      // function to update the date
+      function updateDate() {
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        
+        let dateString = now.toLocaleDateString('en-US', options);
+        document.getElementById("date").innerHTML = dateString;
+      }
+      
+      // update the clock and date every second
+      setInterval(updateClock, 1000);
+      setInterval(updateDate, 1000);
+    </script>
+  </body>
+</html>
