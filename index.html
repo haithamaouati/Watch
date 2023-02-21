@@ -38,13 +38,19 @@
       }
       
       // function to update the date
-      function updateDate() {
-        const now = new Date();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        
-        let dateString = now.toLocaleDateString('en-US', options);
-        document.getElementById("date").innerHTML = dateString;
-      }
+ function updateDate() {
+  const now = new Date();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+  // get the Arabic locale and set the options
+  const arLocale = 'ar-SA-u-nu-arab';
+  const arOptions = { ...options, localeMatcher: 'lookup', numberingSystem: 'arab' };
+
+  let dateStringEn = now.toLocaleDateString('en-US', options);
+  let dateStringAr = now.toLocaleDateString(arLocale, arOptions);
+
+  document.getElementById("date").innerHTML = `${dateStringEn}<br>${dateStringAr}`;
+}
       
       // update the clock and date every second
       setInterval(updateClock, 1000);
